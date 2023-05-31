@@ -1,0 +1,38 @@
+<view style="margin-left:10px;margin-top:10px;height:50px;line-height:50px;font-size:18px;font-weight:600;">
+  {{orderData.status}}
+</view>
+<view style="background:white;border-radius:10px;margin-top:10px;margin-left:10px;margin-right:10px;overflow:auto;">
+  <view wx:for="{{orderData.orderInfoList}}" wx:key="id" style="width:100%;height:70px;margin-top:10px;border-bottom:1px solid #eeeeee;">
+    <image src="{{imageUrl+item.image}}" style="width:60px;height:60px;float:left;border-radius:10px;margin-left:10px;" />
+    <view style="float:left;height:60px;margin-left:10px;">
+      <view style="height:30px;line-height:30px;">{{item.name}}</view>
+      <view style="height:30px;line-height:30px;">×{{item.num}}</view>
+    </view>
+    <view style="float:right;height:60px;line-height:60px;margin-right:10px;">
+    ￥{{item.totalprice}}
+    </view>
+  </view>
+  <view style="float:right;height:40px;line-height:40px;margin-right:10px;">合计：￥{{orderData.totalmoney}}</view>
+</view>
+<view style="margin-left:10px;margin-right:10px;margin-top:10px;overflow:auto;background:white;border-radius:10px;font-size:13px;">
+  <view style="width:100%;height:40px;line-height:40px;border-bottom:1px solid #eeeeee;">
+    <view style="margin-left:10px;">下单时间：{{orderData.createtime}}</view>
+  </view>
+  <view style="width:100%;height:40px;line-height:40px;border-bottom:1px solid #eeeeee;">
+    <view style="margin-left:10px;">订单编号：{{orderData.number}}</view>
+  </view>
+  <view style="width:100%;height:40px;line-height:40px;border-bottom:1px solid #eeeeee;">
+    <view wx:if="{{orderData.type=='TS'}}" style="margin-left:10px;">就餐方式：堂食</view>
+    <view wx:if="{{orderData.type=='WM'}}" style="margin-left:10px;">就餐方式：外卖</view>
+  </view>
+  <view wx:if="{{orderData.type=='WM'}}" style="width:100%;height:40px;line-height:40px;border-bottom:1px solid #eeeeee;">
+    <view style="margin-left:10px;">收货地址：{{orderData.address}}</view>
+  </view>
+  <view wx:if="{{orderData.type=='WM'}}" style="width:100%;height:40px;line-height:40px;border-bottom:1px solid #eeeeee;">
+    <view style="margin-left:10px;">联系人<text style="color:white;">名</text>：{{orderData.name}}</view>
+  </view>
+  <view wx:if="{{orderData.type=='WM'}}" style="width:100%;height:40px;line-height:40px;border-bottom:1px solid #eeeeee;">
+    <view style="margin-left:10px;">联系电话：{{orderData.tel}}</view>
+  </view>
+</view>
+<view style="height:10px;width:100%;"></view>

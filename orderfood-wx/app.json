@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/index",
+    "pages/orderfood",
+    "pages/order",
+    "pages/my",
+    "pages/about",
+    "pages/address",
+    "pages/coupon",
+    "pages/addAddress",
+    "pages/orderFoodSearch",
+    "pages/orderInfo",
+    "pages/shopcar"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "在线点餐",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#06bd04",
+    "list": [
+      {
+        "pagePath": "pages/index",
+        "text": "首页",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_on.png"
+      },
+      {
+        "pagePath": "pages/orderfood",
+        "text": "点餐",
+        "iconPath": "images/orderfood.png",
+        "selectedIconPath": "images/orderfood_on.png"
+      },
+      {
+        "pagePath": "pages/order",
+        "text": "订单",
+        "iconPath": "images/order.png",
+        "selectedIconPath": "images/order_on.png"
+      },
+      {
+        "pagePath": "pages/my",
+        "text": "我的",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/my_on.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "l-steps": "/dist/steps/index",
+    "l-step": "/dist/step/index",
+    "l-badge": "/dist/badge/index",
+    "l-search-bar": "/dist/search-bar/index",
+    "l-toast": "/dist/toast/index",
+    "l-loading": "/dist/loading/index",
+    "l-dialog": "/dist/dialog/index",
+    "l-icon": "/dist/icon/index",
+    "l-input": "/dist/input/index",
+    "l-radio-group": "/dist/radio-group/index",
+    "l-radio": "/dist/radio/index",
+    "l-button": "/dist/button/index",
+    "l-popup": "/dist/popup/index"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

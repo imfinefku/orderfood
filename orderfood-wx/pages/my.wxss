@@ -1,0 +1,27 @@
+/* pages/my.wxss */
+page{
+  background-color: #eeeeee
+}
+
+.sth{
+  width: 90%;
+  margin-left:5%;
+  height: 50px;
+  border-bottom: 1px solid #eeeeee;
+  line-height:50px;
+}
+
+.right{
+  width:20px;
+  height:20px;
+  float:right;
+  margin-top:15px;
+}
+
+.icon{
+  width:20px;
+  height:20px;
+  float:left;
+  margin-top:15px;
+  margin-right:5px;
+}

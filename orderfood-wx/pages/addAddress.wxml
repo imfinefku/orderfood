@@ -1,0 +1,13 @@
+<l-input required="{{true}}" data-name="address" value="{{address}}" label="地址"  placeholder="请填写详细地址" bind:lininput="getInputValue"/>
+<l-input required="{{true}}" data-name="name" value="{{name}}" label="联系人"  placeholder="请填写收货人的姓名" bind:lininput="getInputValue"/>
+<l-input required="{{true}}" data-name="tel" value="{{tel}}" label="手机号"  placeholder="请填写收货手机号码" bind:lininput="getInputValue"/>  
+<view style="float:left;line-height:40px;margin-top:20px;border-radius:10px;height:40px;width:80%;background:#8B0909;color:white;font-weight:600;text-align:center;margin-left:10%;"
+    bindtap="addAddress">
+    保存地址
+</view>
+<l-toast
+  show="{{showError}}"
+  icon="error"
+  title="{{errorMessage}}"
+/>
+<l-loading show="{{showLoading}}" type="change" full-screen="{{true}}"></l-loading>

@@ -1,0 +1,61 @@
+<view style="height:150px;width:100%;background:#8B0909;">
+  <view style="height:60px;width:60px;margin-top:40px;margin-left:7%;float:left;">
+    <image src="../images/my_icon.jpg" style="height:60px;width:60px;"></image>
+  </view>
+  <view style="height:60px;float:left;margin-left:10px;color:white;margin-top:40px;">
+    <view style="height:30px;line-height:30px;">
+      {{username}}
+    </view>
+    <view style="height:30px;line-height:30px;font-size:12px;">
+      {{curVipName}}
+    </view>
+  </view>
+</view>
+<view
+  style="height:100px;width:90%;margin-left:5%;background:white;position:absolute;top:120px;border-radius:10px;font-size:13px;">
+  <view style="float:right;margin-right:5%;margin-top:10px;color:#45526b;" bindtap="searchMessage">查看权益 <l-icon style="float:right;margin-left:5px;margin-right:10px;margin-top:3.5px;" name="help" size="25"/></view>
+  <view style="margin-top:37px;">
+    <l-steps active-index="{{curVipSize}}">
+      <l-step wx:for="{{vipLevel}}" wx:key="key" wx:for-item="item" title="{{item.name}}"></l-step>
+    </l-steps>
+  </view>
+</view>
+<view style="height:80px;width:90%;margin-left:5%;background:white;position:absolute;top:230px;border-radius:10px;">
+  <image onload="unLoading" style="height:100%;width:100%;border-radius:10px;" src="../images/my_fl.png"></image>
+</view>
+<view style="position:absolute;top:320px;width:90%;margin-left:5%;border-radius:10px;background:white;">
+  <navigator url='order' open-type="switchTab">
+    <view class="sth">
+      <image src="../images/order_on.png" class="icon"></image>
+      我的订单
+      <image src="../images/right.png" class="right"></image>
+    </view>
+  </navigator>
+  <navigator url='address'>
+    <view class="sth">
+      <image src="../images/address.png" class="icon"></image>
+      我的地址
+      <image src="../images/right.png" class="right"></image>
+    </view>
+  </navigator>
+  <navigator url='coupon'>
+    <view class="sth">
+      <image src="../images/myinfo.png" class="icon"></image>
+      个人信息
+      <image src="../images/right.png" class="right"></image>
+    </view>
+  </navigator>
+  <navigator url='about'>
+    <view style="width: 90%;margin-left:5%;height: 50px;line-height:50px;">
+      <image src="../images/about.png" class="icon"></image>
+      关于
+      <image src="../images/right.png" class="right"></image>
+    </view>
+  </navigator>
+</view>
+<l-dialog 
+  show="{{showMessage}}"
+  type="alert"  
+  show-title="{{false}}"
+  content="下单可以获得积分提高会员等级，获取我们的福利。" />
+  <l-loading show="{{showLoading}}" type="change" full-screen="{{true}}"></l-loading>

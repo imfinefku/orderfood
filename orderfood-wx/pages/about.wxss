@@ -1,0 +1,4 @@
+/* pages/about.wxss */
+page{
+  background-color: #eeeeee
+}

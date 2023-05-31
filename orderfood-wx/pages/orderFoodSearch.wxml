@@ -1,0 +1,43 @@
+<!--pages/xuezhabiji/searchPage.wxml-->
+<view style="width:100%;">
+  <view style="width:100%;height:25rpx;text-align:left;font-size:15px;">
+  </view>
+  <view style="width:80%;float:left;">
+    <l-search-bar value="{{searchWord}}" placeholder="想吃什么搜一搜" bg-color="white" show-cancel="{{false}}" shape="circle"
+      bind:linchange="changeSearchWorld" bind:linclear="changeSearchWorld">
+    </l-search-bar>
+  </view>
+  <view style="width:20%;float:left;">
+    <l-button size="mini" shape="semicircle" bg-color="#8B0909" bindtap="searchData">搜索</l-button>
+  </view>
+  <view style="width:100%;height:25rpx;float:left;">
+  </view>
+  <view style="background-color:white;float:left;width:100%;text-align:center;font-size:13px;"
+    wx:if="{{noDataFlag}}">
+    未找到相关菜品
+  </view>
+  <view style="width:100%;overflow:auto;background:white;">
+    <view wx:for="{{searchData}}" wx:key="id" style="width:75%;margin-left:12.5%;">
+      <view style="width:100%;height:{{foodHeight}}px;">
+        <view style="height:80px;margin-top:10px;width:30%;margin-left:2.5%;margin-right:2.5%;float:left;">
+          <image src="{{imageUrl+item.image}}" style="height:100%;width:100%;border-radius:10px;"></image>
+        </view>
+        <view style="height:80px;width:60%;margin-top:10px;float:left;">
+          <view style="height:30px;width:100%;line-height:30px;font-weight:600;">{{item.name}}</view>
+          <view style="height:20px;width:100%;font-size:12px;">已售{{item.sold}}</view>
+          <view style="height:30px;width:100%;margin-top:5px;">
+            <view style="height:100%;float:left;"><text style="font-weight:600;">￥{{item.price}}</text>/份</view>
+            <view style="height:100%;float:right;">
+              <image data-id="{{item.id}}" data-typeid="{{item.typeid}}" src="../images/jia.png" bindtap="addShopNum"
+                style="height:23px;width:23px;float:right;margin-right:10px;"></image>
+              <view wx:if="{{item.shopNum>0}}" style="float:right;margin-left:3px;margin-right:3px;">{{item.shopNum}}
+              </view>
+              <image data-id="{{item.id}}" data-typeid="{{item.typeid}}" wx:if="{{item.shopNum>0}}"
+                src="../images/jian.png" bindtap="reduceShopNum" style="height:23px;width:23px;float:right;"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

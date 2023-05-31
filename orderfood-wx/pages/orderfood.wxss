@@ -1,0 +1,16 @@
+page{
+  background-color: #eeeeee
+}
+.typeClass{
+  width:100%;
+  min-height:50px;
+  font-size:13px;
+}
+
+.typeSelectClass{
+  width:100%;
+  min-height:50px;
+  background:white;
+  color:#8B0909;
+  font-size:13px;
+}

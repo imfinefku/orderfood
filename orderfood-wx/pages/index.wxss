@@ -1,0 +1,4 @@
+/* pages/index.wxss */
+page{
+  background-color: #eeeeee
+}

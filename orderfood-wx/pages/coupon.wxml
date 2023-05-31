@@ -1,0 +1,6 @@
+<l-input required="{{true}}" value="{{username}}" label="昵称"  placeholder="请填写显示昵称" bind:lininput="getInputValue"/>
+
+<view style="float:left;line-height:40px;margin-top:20px;border-radius:10px;height:40px;width:80%;background:#8B0909;color:white;font-weight:600;text-align:center;margin-left:10%;"
+    bindtap="saveMessage">
+    保存个人信息
+</view>

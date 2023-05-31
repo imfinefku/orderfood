@@ -1,0 +1,35 @@
+<view style="text-align:center;height:50px;line-height:50px;">
+  <view style="float:left;height:100%;width:30%;"></view>
+  <view style="float:left;height:100%;width:40%;font-weight:600;">我的收货地址</view>
+  <view style="float:left;height:100%;width:30%;font-size:13px;">
+    <view
+      style="border-radius:10px;background:#8B0909;color:white;height:30px;line-height:30px;margin-top:10px;margin-right:10px;">
+      <navigator url='addAddress'>
+        新增地址
+      </navigator>
+    </view>
+  </view>
+</view>
+<view style="position:absolute;top:50px;bottom:0px;left:0;right:0;overflow:auto;">
+  <view wx:for="{{addressData}}" wx:key="id"
+    style="margin-left:10px;margin-right:10px;height:60px;border-bottom:1px solid #eeeeee;">
+    <view style="width:85%;float:left;height:100%;">
+      <view style="width:100%;height:50%;line-height:30px;font-weight:600;overflow:hidden;">
+        {{item.address}}
+      </view>
+      <view style="width:100%;height:50%;line-height:30px;font-size:13px;overflow:hidden;">
+        {{item.name}}  {{item.tel}}
+      </view>
+    </view>
+    <view style="width:15%;float:left;height:100%;text-align:center;">
+      <image data-id="{{item.id}}" bindtap="updateAddress" style="height:25px;width:25px;margin-top:17.5px;" src="../images/update.png" />
+    </view>
+  </view>
+  <view wx:if="{{addressData.length==0}}" style="width:100%;height:200px;text-align:center;">
+    <image src="../images/noAddress.png" style="width:100px;height:100px;margin-top:50px;">
+    </image>
+  </view>
+  <view wx:if="{{addressData.length==0}}" style="width:100%;height:60px;text-align:center;">
+    暂时没有收货地址
+  </view>
+</view>

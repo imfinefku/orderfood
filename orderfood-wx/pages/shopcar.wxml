@@ -1,0 +1,125 @@
+<!--pages/shopcar.wxml-->
+<view style="text-align:center;font-weight:600;height:60px;line-height:60px;font-size:18px;">购物车</view>
+<view style="position:absolute;top:60px;bottom:60px;left:0;right:0;overflow:auto;">
+  <view wx:if="{{showFoodData.length==0}}" style="width:100%;height:200px;text-align:center;">
+    <image onload="unLoading" src="../images/noShop.png" style="width:100px;height:100px;margin-top:50px;">
+    </image>
+  </view>
+  <view wx:if="{{showFoodData.length==0}}" style="width:100%;height:60px;text-align:center;">
+    购物车空空如也
+  </view>
+  <view wx:if="{{showFoodData.length>0}}"
+    style="margin-left:10px;margin-right:10px;background:white;border-radius:10px;">
+    <view
+      style="margin-left:10px;margin-right:10px;height:40px;line-height:40px;border-bottom:1px solid #666666;font-weight:600;">
+      <view style="float:left;">共点{{totalNum}}份</view>
+      <view style="float:right;" bindtap="showDelShopCar">
+        <image onload="unLoading" src="../images/del.png" style="width:25px;height:25px;margin-top:7px;"></image>
+      </view>
+    </view>
+    <view wx:for="{{showFoodData}}" wx:key="id"
+      style="height:60px;margin-left:10px;margin-right:10px;border-radius:10px;margin-top:20px;">
+      <image src="{{imageUrl+item.image}}" style="height:60px;width:60px;border-radius:10px;float:left;"></image>
+      <view style="float:left;height:100%;width:50%;margin-left:10px;">
+        <view style="height:50%;width:100%;line-height:30px;">{{item.name}}</view>
+        <view style="height:50%;width:100%;line-height:30px;">￥{{item.price}}</view>
+      </view>
+      <view style="float:right;height:100%;line-height:60px;">
+        <image data-id="{{item.id}}" src="../images/jia.png"
+          style="height:23px;width:23px;float:right;margin-top:18.5px;" bindtap="addShopNum"></image>
+        <view wx:if="{{item.shopNum>0}}" style="float:right;margin-left:3px;margin-right:3px;">{{item.shopNum}}</view>
+        <image data-id="{{item.id}}" wx:if="{{item.shopNum>0}}" src="../images/jian.png"
+          style="height:23px;width:23px;float:right;margin-top:18.5px;" bindtap="reduceShopNum"></image>
+      </view>
+    </view>
+    <view style="height:20px;width:100%;"></view>
+  </view>
+  <view wx:if="{{showFoodData.length>0}}"
+    style="height:60px;background:white;margin-left:10px;margin-right:10px;border-radius:10px;line-height:60px;margin-bottom:10px;margin-top:10px;">
+    <view style="height:100%;margin-left:10px;float:left;">
+      就餐方式：
+    </view>
+    <view style="height:100%;float:left;">
+      <radio-group bindchange="handleChange">
+        <radio checked color='#8B0909' value="TS" style="margin-right:20px;">堂食</radio>
+        <radio value="WM" color='#8B0909'>外卖</radio>
+      </radio-group>
+    </view>
+  </view>
+  <view wx:if="{{eatType=='WM' && showFoodData.length>0}}"
+    style="height:60px;background:white;margin-left:10px;margin-right:10px;border-radius:10px;line-height:60px;margin-bottom:10px;"
+    bindtap="chooseAddress">
+    <view style="height:100%;margin-left:10px;float:left;width:20%;">
+      地址：
+    </view>
+    <view style="width:60%;float:left;height:100%;" bindtap="changeAddress">
+      <view style="width:100%;height:50%;line-height:30px;font-weight:600;overflow:hidden;">
+        {{curAddress.address}}
+      </view>
+      <view style="width:100%;height:50%;line-height:30px;font-size:13px;overflow:hidden;">
+        {{curAddress.name}} {{curAddress.tel}}
+      </view>
+    </view>
+    <view style="float:left;width:10%;height:100%;color:#8B0909;text-align:right;">
+      >
+    </view>
+  </view>
+  <view wx:if="{{showFoodData.length>0}}"
+    style="margin-left:10px;margin-right:10px;background:white;border-radius:10px;margin-top:10px;height:50px;line-height:50px;margin-bottom:10px;">
+    <view style="float:left;margin-left:10px;">合计：</view>
+    <view style="float:right;margin-right:10px;font-weight:600;">￥{{totalPrice}}</view>
+  </view>
+</view>
+<view style="position:absolute;bottom:0px;width:100%;height:60px;background:white;">
+  <navigator url='orderfood'>
+    <view
+      style="float:left;width:30%;height:40px;color:#8B0909;border:1px solid #8B0909;line-height:40px;margin-top:10px;border-radius:30px;font-weight:600;text-align:center;margin-left:3%;">
+      <navigator url='orderfood' open-type="switchTab">继续点餐</navigator>
+    </view>
+  </navigator>
+  <view
+    style="float:right;line-height:40px;margin-top:10px;border-radius:30px;height:40px;width:60%;background:#8B0909;color:white;font-weight:600;text-align:center;margin-right:3%;"
+    bindtap="addOrder">下单</view>
+</view>
+<l-toast show="{{orderSuccess}}" icon="success" title="下单成功" />
+<l-toast show="{{orderError}}" icon="error" title="下单失败，请联系店家" />
+<l-toast show="{{noFood}}" icon="error" title="下单失败，购物车内没有菜品" />
+<l-toast show="{{noAddress}}" icon="error" title="下单失败，收货地址为空" />
+<l-dialog show="{{delShopCar}}" type="confirm" bind:linconfirm="clearShopCar" confirm-color="#8B0909"
+  show-title="{{false}}" content="是否清空购物车?" />
+<l-loading show="{{showLoading}}" type="change" full-screen="{{true}}"></l-loading>
+<l-radio-group current="{{curAddress.id}}" none-checked="{{false}}">
+  <view wx:if="{{showAddress}}"
+    style="position:absolute;left:0px;right:0px;top:0px;bottom:0px;background:rgba(0,0,0,0.5)">
+    <view
+      style="position:absolute;left:0px;right:0px;top:200px;bottom:0px;background:white;overflow:auto;border-radius:10px;">
+      <view style="width:95%;height:30px;text-align:right;margin-right:5%;font-size:20px;">
+        <view style="height:30px;width:30px;float:right;" bindtap="closeAddress">×</view>
+      </view>
+      <view wx:if="{{addressData.length==0}}" style="margin-top:100px;height:100px;width:100%;text-align:center;">
+        <view>暂无地址</view>
+        <navigator url='addAddress'>
+          <view
+            style="border-radius:30px;background:#8B0909;color:white;height:40px;line-height:40px;width:40%;text-align:center;margin-left:30%;margin-top:20px;">
+            添加收货地址
+          </view>
+        </navigator>
+      </view>
+      <view data-id="{{item.id}}" wx:for="{{addressData}}" wx:key="id"
+        style="margin-left:10px;margin-right:10px;height:60px;border-bottom:1px solid #eeeeee;"
+        bindtap="updateCurAddress">
+        <view style="width:12%;height:100%;float:left;margin-left:3%;line-height:60px;">
+          <l-radio key="{{item.id}}"></l-radio>
+        </view>
+        <view style="width:85%;float:left;height:100%;">
+          <view style="width:100%;height:50%;line-height:30px;font-weight:600;overflow:hidden;">
+            {{item.address}}
+          </view>
+          <view style="width:100%;height:50%;line-height:30px;font-size:13px;overflow:hidden;">
+            {{item.name}} {{item.tel}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</l-radio-group>

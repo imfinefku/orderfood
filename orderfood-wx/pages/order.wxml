@@ -1,0 +1,37 @@
+<!--pages/shopcar.wxml-->
+<view style="text-align:center;font-weight:600;height:60px;line-height:60px;font-size:18px;">我的订单</view>
+<view style="position:absolute;top:60px;bottom:0px;left:0;right:0;overflow:auto;">
+  <view wx:if="{{orderData.length==0}}" style="width:100%;height:200px;text-align:center;">
+    <image onload="unLoading" src="../images/noOrder.png" style="width:100px;height:100px;margin-top:50px;">
+    </image>
+  </view>
+  <view wx:if="{{orderData.length==0}}" style="width:100%;height:60px;text-align:center;">
+    暂时没有订单
+  </view>
+  <view wx:if="{{orderData.length==0}}"
+    style="line-height:40px;margin-top:10px;border-radius:30px;height:40px;width:60%;margin-left:20%;background:#8B0909;color:white;font-weight:600;text-align:center;">
+    <navigator url='orderfood' open-type="switchTab">
+      去点单
+    </navigator>
+  </view>
+  <view wx:for="{{orderData}}" wx:key="id"
+    style="margin-left:10px;margin-right:10px;height:100px;border-bottom:1px solid #eeeeee;background:white;border-radius:10px;margin-bottom:10px;" data-id="{{item.id}}" bindtap="toOrderInfo">
+    <view style="width:100%;float:left;height:30px;line-height:30px;font-size:13px;" >
+      <view style="height:100%;float:left;margin-left:10px;">订单编号：{{item.number}}</view>
+      <view style="height:100%;float:right;margin-right:10px;color:{{item.color}}">{{item.status}}</view>
+    </view>
+    <view style="width:100%;float:left;height:60px;font-size:13px;">
+      <view style="width:60px;height:60px;margin-left:10px;float:left;">
+        <image src="{{imageUrl+item.orderInfoList[0].image}}" style="width:60px;height:60px;" onload="unLoading"/>
+      </view>
+      <view style="float:left;height:60px;margin-left:10px;">
+        <view style="height:20px;line-height:20px;">下单时间：{{item.createtime}}</view>
+        <view style="height:20px;line-height:20px;">{{item.orderInfoList[0].name}} 等{{item.totalnum}}份菜品</view>
+        <view style="height:20px;line-height:20px;">
+          实付：￥{{item.totalmoney}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<l-loading show="{{showLoading}}" type="change" full-screen="{{true}}"></l-loading>
