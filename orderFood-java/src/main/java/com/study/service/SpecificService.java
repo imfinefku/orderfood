@@ -65,23 +65,12 @@ public class SpecificService {
         int score = mapper.getUserScore(UserContextHolder.getInstance().getId());
         rtnMap.put("curVipName",userLevelList.get(userLevelList.size()-1).getName());
         rtnMap.put("curVipSize",userLevelList.size()-1);
-        for (int i=0;i<userLevelList.size();i++){
-            if (score< userLevelList.get(i).getMaxscore()){
-                rtnMap.put("curVipName",userLevelList.get(i).getName());
-                rtnMap.put("curVipSize",i);
-                break;
-            }
-        }
         rtnMap.put("vipLevel",userLevelList);
         return rtnMap;
     }
 
     public List<Order> getUserOrder(){
         List<Order> orderList = mapper.getUserOrder(UserContextHolder.getInstance().getId());
-        for (Order order : orderList){
-            List<OrderInfo> orderInfoList = mapper.getOrderInfoByOrderId(order.getId());
-            order.setOrderInfoList(orderInfoList);
-        }
         return orderList;
     }
 
@@ -91,17 +80,11 @@ public class SpecificService {
 
     public Order getOrderById(String id){
         Order order = mapper.getOrderById(id);
-        List<OrderInfo> orderInfoList = mapper.getOrderInfoByOrderId(order.getId());
-        order.setOrderInfoList(orderInfoList);
         return order;
     }
 
     public List<Order> getOrderByPage(Map dataMap){
         List<Order> dataList = mapper.getOrderByPage(dataMap);
-        for (Order order : dataList){
-            List<OrderInfo> orderInfoList = mapper.getOrderInfoByOrderId(order.getId());
-            order.setOrderInfoList(orderInfoList);
-        }
         return dataList;
     }
 

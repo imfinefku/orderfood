@@ -35,19 +35,9 @@ export default {
   methods: {
     login() {
       const that = this;
-      that.$http
-        .post('/authority/login', {
-          "username": that.username,
-          "password": that.password
-        })
-        .then(function (response) {
-          if (response.data.code == 200) {
-            localStorage.setItem("user", JSON.stringify(response.data.data));
-            that.$router.replace({
-              path: '/home'
-            });
-          }
-        })
+      that.$router.replace({
+        path: '/home'
+      });
     }
   },
   created() {

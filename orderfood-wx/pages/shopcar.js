@@ -22,22 +22,9 @@ Page({
   },
 
   chooseAddress: function (){
-    this.data.showAddress=true;
-    this.setData({
-      showAddress:true
-    })
   },
 
   updateCurAddress: function(e){
-    for (var i=0;i<this.data.addressData.length;i++){
-      if (this.data.addressData[i].id==e.currentTarget.dataset.id){
-        this.data.curAddress=this.data.addressData[i];
-        this.setData({
-          curAddress:this.data.curAddress,
-          showAddress:false
-        })
-      }
-    }
   },
 
   /**
@@ -48,25 +35,6 @@ Page({
   },
 
   getAddress: function(){
-    http.request(
-      "/specific/getAddress",
-      "GET",
-      {
-      },
-      {
-        "content-type":"application/x-www-form-urlencoded"
-      },
-      (res)=>{
-        this.data.addressData=res.data.data;
-        if (this.data.addressData.length>0){
-          this.data.curAddress=this.data.addressData[0];
-        }
-        this.setData({
-          addressData:this.data.addressData,
-          curAddress:this.data.curAddress
-        })
-      }
-    )
   },
 
   /**
@@ -105,46 +73,9 @@ Page({
   },
 
   getTypeData: function(){
-    http.request(
-      "/specific/getWxFoodTypeAll",
-      "GET",
-      {},
-      {
-        "content-type":"application/x-www-form-urlencoded"
-      },
-      (res)=>{
-        this.data.foodData=res.data.data.foodData;
-        this.showShopNum(res.data.data.foodData);
-      }
-    )
   },
 
   showShopNum:function(data){
-    var shopNum = wx.getStorageSync("shopNum");
-    var showFoodData=[];
-    var totalPrice=0;
-    var totalNum = 0;
-    if (shopNum!=null && shopNum!="" && shopNum.length>0){
-      for (var i=0;i<data.length;i++){
-        for (var j=0;j<shopNum.length;j++){
-          if (data[i].id==shopNum[j].id && shopNum[j].num>0){
-            data[i].shopNum = shopNum[j].num;
-            showFoodData.push(data[i]);
-            totalNum+=shopNum[j].num;
-            totalPrice+=shopNum[j].num*data[i].price;
-            break;
-          }
-        }
-      }
-    }
-    this.data.totalNum=totalNum;
-    this.data.totalPrice=totalPrice;
-    this.data.showFoodData=showFoodData;
-    this.setData({
-      totalNum:totalNum,
-      showFoodData:showFoodData,
-      totalPrice:totalPrice
-    })
   },
 
   handleChange: function(e){
@@ -155,41 +86,9 @@ Page({
   },
 
   addShopNum: function(e){
-    var shopNum = wx.getStorageSync("shopNum");
-    var flag=false;
-    if (shopNum!=null && shopNum!="" && shopNum.length>0){
-      for (var i=0;i<shopNum.length;i++){
-        if (shopNum[i].id==e.currentTarget.dataset.id){
-          shopNum[i].num++;
-          flag=true;
-          break;
-        }
-      }
-    }else{
-      shopNum=[];
-    }
-    if (!flag){
-      var data={"id":e.currentTarget.dataset.id,"num":1,"typeid":e.currentTarget.dataset.typeid};
-      shopNum.push(data);
-    }
-    wx.setStorageSync("shopNum",shopNum);
-    this.showShopNum(this.data.foodData);
   },
 
   reduceShopNum: function(e){
-    var shopNum = wx.getStorageSync("shopNum");
-    if (shopNum!=null && shopNum!="" && shopNum.length>0){
-      for (var i=0;i<shopNum.length;i++){
-        if (shopNum[i].id==e.currentTarget.dataset.id){
-          if (shopNum[i].num>0){
-            shopNum[i].num--;
-          }
-          break;
-        }
-      }
-    }
-    wx.setStorageSync("shopNum",shopNum);
-    this.showShopNum(this.data.foodData);
   },
 
   addOrder:function(){
@@ -200,8 +99,6 @@ Page({
   },
 
   clearShopCar: function(){
-    wx.setStorageSync("shopNum",[]);
-    this.showShopNum(this.data.foodData);
   },
 
   changeAddress: function(){

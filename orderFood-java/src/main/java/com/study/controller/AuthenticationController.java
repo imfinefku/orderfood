@@ -69,19 +69,6 @@ public class AuthenticationController {
         String openid = jsonObject.getString("openid");
         if (jsonObject!=null && openid!=null && !"".equals(openid)){
             User user = authenticationService.searchDataByOpenid(openid);
-            Date date = new Date();
-            if (user==null){
-                user = new User();
-                user.setCreatetime(date);
-                user.setLastlogintime(date);
-                user.setId(UUID.randomUUID().toString());
-                user.setOpenid(openid);
-                user.setScore(0);
-                authenticationService.addData(user);
-            }else{
-                user.setLastlogintime(date);
-                authenticationService.updateData(user);
-            }
             user.setName("default");
             //返回token
             String token = JWTUtil.sign(user);
@@ -196,11 +183,7 @@ public class AuthenticationController {
      */
     @GetMapping("/getRoleMenu")
     public CommonResult getRoleMenu(@RequestParam String roleid) {
-        List<RoleMenu> dataList = authenticationService.getRoleMenu(roleid, RoleMenu.ALL_SELECT);
         List<String> rtnList = new ArrayList<String>();
-        for (RoleMenu roleMenu : dataList) {
-            rtnList.add(roleMenu.getMenuid());
-        }
         return CommonResult.success(rtnList);
     }
 

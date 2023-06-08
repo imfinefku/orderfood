@@ -48,12 +48,6 @@ public class AuthenticationService {
     public List<Menu> getMenu() {
         List<Menu> allMenuList = authenticationMapper.getMenu();
         List<Menu> topMenuList = new ArrayList<Menu>();
-        //获取所有顶级菜单
-        for (Menu menu : allMenuList) {
-            if (menu.getMasterid() == null || "".equals(menu.getMasterid())) {
-                topMenuList.add(menu);
-            }
-        }
         setChildrenMenu(topMenuList, allMenuList);
         return topMenuList;
     }
@@ -63,13 +57,7 @@ public class AuthenticationService {
         for (Menu menu : topMenuList) {
             List<Menu> children = new ArrayList<Menu>();
             for (Menu childMenu : allMenuList) {
-                if (childMenu.getMasterid() != null && menu.getId().equals(childMenu.getMasterid())) {
-                    children.add(childMenu);
-                }
-            }
-            if (children.size() > 0) {
-                menu.setChildren(children);
-                setChildrenMenu(children, allMenuList);
+                children.add(childMenu);
             }
         }
     }
@@ -84,8 +72,6 @@ public class AuthenticationService {
             menuTree.setId(menu.getId());
             menuTree.setName(menu.getName());
             menuTree.setRoute(menu.getRoute());
-            menuTree.setIcon(menu.getIcon());
-            menuTree.setSort(menu.getSort());
             menuTree.setChildren(getChildrenMenuTree(menuTree.getId()));
             rtnList.add(menuTree);
         }
@@ -97,9 +83,6 @@ public class AuthenticationService {
             menuTree.setId(menu.getId());
             menuTree.setName(menu.getName());
             menuTree.setRoute(menu.getRoute());
-            menuTree.setIcon(menu.getIcon());
-            menuTree.setSort(menu.getSort());
-            menuTree.setChildren(getChildrenMenuTreeByUser(menuTree.getId(),userid));
             rtnList.add(menuTree);
         }
     }
@@ -119,15 +102,6 @@ public class AuthenticationService {
 
     public List<User> getUserPage(Map dataMap) {
         List<User> userList = authenticationMapper.getUserPage(dataMap);
-        for (User user : userList) {
-            List<UserRole> userRoleList = authenticationMapper.getUserRoleByUserid(user.getId());
-            user.setUserRoleList(userRoleList);
-            List<String> userRoleLists = new ArrayList<>();
-            for (UserRole userRole : userRoleList) {
-                userRoleLists.add(userRole.getRoleid());
-            }
-            user.setUserRoleLists(userRoleLists);
-        }
         return userList;
     }
 
@@ -184,10 +158,6 @@ public class AuthenticationService {
                 if (childDepartment.getMasterid() != null && department.getId().equals(childDepartment.getMasterid())) {
                     children.add(childDepartment);
                 }
-            }
-            if (children.size() > 0) {
-                department.setChildren(children);
-                setChildrenDepartment(children, allDepartmentList);
             }
         }
     }

@@ -190,9 +190,9 @@ export default {
     //页面创建时执行一次getHeight进行赋值，顺道绑定resize事件
     window.addEventListener("resize", this.getHeight);
     this.getHeight();
+    this.getMenuList();
     this.getBreadcrumb();
     this.setUserBaner();
-    this.getMenuList();
   },
   watch: {
     $route() {

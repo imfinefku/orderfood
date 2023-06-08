@@ -94,21 +94,11 @@ public class SpecificController {
         List<Map> rtnList = new ArrayList<Map>();
         for (FoodType foodType : typeList){
             Map foodTypeMap = new HashMap();
-            foodTypeMap.put("id",foodType.getId());
-            foodTypeMap.put("name",foodType.getName());
-            foodTypeMap.put("type","0");
             rtnList.add(foodTypeMap);
             for (Food food : foodList){
                 if (foodType.getId().equals(food.getTypeid())){
-                    int sold = service.getSoldByFoodId(food.getId());
                     Map foodMap = new HashMap();
                     foodMap.put("id",food.getId());
-                    foodMap.put("typeid",food.getTypeid());
-                    foodMap.put("name",food.getName());
-                    foodMap.put("image",food.getImage());
-                    foodMap.put("price",food.getPrice());
-                    foodMap.put("sold",sold);
-                    foodMap.put("type","1");
                     rtnList.add(foodMap);
                 }
             }
@@ -158,14 +148,8 @@ public class SpecificController {
         List<Map> rtnList = new ArrayList<Map>();
         for (Food food : foodList){
             if (food.getName().contains(searchWord)){
-                int sold = service.getSoldByFoodId(food.getId());
                 Map foodMap = new HashMap();
                 foodMap.put("id",food.getId());
-                foodMap.put("typeid",food.getTypeid());
-                foodMap.put("name",food.getName());
-                foodMap.put("image",food.getImage());
-                foodMap.put("price",food.getPrice());
-                foodMap.put("sold",sold);
                 rtnList.add(foodMap);
             }
         }

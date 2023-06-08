@@ -31,32 +31,9 @@ Page({
   },
 
   getAddress: function(){
-    http.request(
-      "/specific/getAddress",
-      "GET",
-      {
-      },
-      {
-        "content-type":"application/x-www-form-urlencoded"
-      },
-      (res)=>{
-        this.data.addressData=res.data.data;
-        this.setData({
-          addressData : this.data.addressData
-        })
-      }
-    )
   },
 
   updateAddress: function(e){
-    for(var i=0;i<this.data.addressData.length;i++){
-      if (e.currentTarget.dataset.id == this.data.addressData[i].id){
-        wx.navigateTo({
-          url: "addAddress?id="+e.currentTarget.dataset.id+"&address="+this.data.addressData[i].address+"&name="+this.data.addressData[i].name+"&tel="+this.data.addressData[i].tel,
-        })
-        break;
-      }
-    }
   },
 
   /**

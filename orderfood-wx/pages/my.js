@@ -50,21 +50,6 @@ Page({
   },
 
   getUserLevel: function(){
-    http.request(
-      "/specific/getUserLevel",
-      "GET",
-      {},
-      {
-        "content-type":"application/x-www-form-urlencoded"
-      },
-      (res)=>{
-        this.setData({
-          vipLevel:res.data.data.vipLevel,
-          curVipName:res.data.data.curVipName,
-          curVipSize:res.data.data.curVipSize
-        })
-      }
-    )
   },
 
   /**

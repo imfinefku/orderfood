@@ -43,30 +43,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    http.request(
-      "/specific/getUserOrder",
-      "GET",
-      {},
-      {
-        "content-type":"application/x-www-form-urlencoded"
-      },
-      (res)=>{
-        this.data.orderData=res.data.data;
-        for (var i=0;i<this.data.orderData.length;i++){
-          this.data.orderData[i].createtime=this.timestampToTime(this.data.orderData[i].createtime);
-          if (this.data.orderData[i].status=="已接单"){
-            this.data.orderData[i].color="black";
-          }else if (this.data.orderData[i].status=="订单取消"){
-            this.data.orderData[i].color="red";
-          }else if (this.data.orderData[i].status=="订单完成"){
-            this.data.orderData[i].color="blue";
-          }
-        }
-        this.setData({
-          orderData:this.data.orderData
-        })
-      }
-    )
 
   },
 

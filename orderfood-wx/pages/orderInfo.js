@@ -14,23 +14,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    http.request(
-      "/specific/getOrderById",
-      "GET",
-      {
-        "id":options.id
-      },
-      {
-        "content-type":"application/x-www-form-urlencoded"
-      },
-      (res)=>{
-        this.data.orderData=res.data.data;
-        this.data.orderData.createtime=this.timestampToTime(this.data.orderData.createtime);
-        this.setData({
-          orderData:this.data.orderData
-        })
-      }
-    )
   },
 
   /**

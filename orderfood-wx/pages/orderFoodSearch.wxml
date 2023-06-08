@@ -28,12 +28,7 @@
           <view style="height:30px;width:100%;margin-top:5px;">
             <view style="height:100%;float:left;"><text style="font-weight:600;">￥{{item.price}}</text>/份</view>
             <view style="height:100%;float:right;">
-              <image data-id="{{item.id}}" data-typeid="{{item.typeid}}" src="../images/jia.png" bindtap="addShopNum"
-                style="height:23px;width:23px;float:right;margin-right:10px;"></image>
-              <view wx:if="{{item.shopNum>0}}" style="float:right;margin-left:3px;margin-right:3px;">{{item.shopNum}}
-              </view>
-              <image data-id="{{item.id}}" data-typeid="{{item.typeid}}" wx:if="{{item.shopNum>0}}"
-                src="../images/jian.png" bindtap="reduceShopNum" style="height:23px;width:23px;float:right;"></image>
+
             </view>
           </view>
         </view>
