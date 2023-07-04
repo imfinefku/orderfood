@@ -1,4 +1,18 @@
 /* pages/index.wxss */
 page{
-  background-color: #eeeeee
+  background-color: white;
+}
+
+.block{
+  position:absolute;
+  top:10px;
+  left:10px;
+  right:10px;
+  bottom:10px;
+  background:#f8f4e4;
+  border-radius:10px;
+  text-align:center;
+  font-size:20px;
+  font-weight:600;
+  color:#8B0909;
 }
