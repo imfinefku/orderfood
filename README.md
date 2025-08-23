@@ -13,7 +13,7 @@
 
 ## 功能介绍
 
-权限管理：包含菜单管理、用户管理、角色管理、部门管理、用户权限分配。<br>
+权限管理：包含管理台、菜单管理、用户管理、角色管理、部门管理、用户权限分配。<br>
 小程序管理：包含菜品种类、菜品管理、订单管理、会员等级。<br>
 小程序端：菜品查询、点餐、购物车管理、堂食外卖、下单、订单查询、地址管理。<br>
 
@@ -68,9 +68,15 @@
 <img src="./images/6.png" width="300" height="534" /><br>
 #### 7.管理端登录页面
 <img src="./images/7.png" width="600" height="300" /><br>
-#### 8.管理端菜品种类
+#### 8.管理端管理台
 <img src="./images/8.png" width="600" height="300" /><br>
-#### 9.管理端菜品管理
+#### 9.管理端菜品种类
 <img src="./images/9.png" width="600" height="300" /><br>
-#### 10.管理端订单管理
+#### 10.管理端菜品管理
 <img src="./images/10.png" width="600" height="300" /><br>
+#### 11.管理端订单管理
+<img src="./images/11.png" width="600" height="300" /><br>
+#### 12.管理端采购管理
+<img src="./images/12.png" width="600" height="300" /><br>
+#### 13.管理端损耗管理
+<img src="./images/13.png" width="600" height="300" /><br>
